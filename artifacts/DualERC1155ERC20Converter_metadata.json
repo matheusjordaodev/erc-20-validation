@@ -1,0 +1,928 @@
+{
+	"compiler": {
+		"version": "0.8.25+commit.b61c2a91"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"stateMutability": "nonpayable",
+				"type": "constructor"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "owner",
+						"type": "address"
+					}
+				],
+				"name": "OwnableInvalidOwner",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "account",
+						"type": "address"
+					}
+				],
+				"name": "OwnableUnauthorizedAccount",
+				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "AllowedERC1155ForwardAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "AllowedERC1155ForwardRemoved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "AllowedERC1155ReverseAdded",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "AllowedERC1155ReverseRemoved",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "erc1155TokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "erc1155Amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "erc20Amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "ConversionPerformed",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC1155ToERC20Conversion",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"name": "ERC20ToERC1155Conversion",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousERC20",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newERC20",
+						"type": "address"
+					}
+				],
+				"name": "ERC20TokenUpdated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "previousOwner",
+						"type": "address"
+					},
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "OwnershipTransferred",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "addAllowedERC1155Forward",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "addAllowedERC1155Reverse",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "allowedERC1155Forward",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "allowedERC1155Reverse",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "conversionHistory",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "erc1155TokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "erc1155Amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "erc20Amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "conversionRecordsBySender",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "erc1155TokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "erc1155Amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "erc20Amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "conversionRecordsERC20ToERC1155ByUser",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					}
+				],
+				"name": "convertToERC1155",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"name": "erc20ToErc1155History",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "user",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "amount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "timestamp",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "erc20Token",
+				"outputs": [
+					{
+						"internalType": "contract IERC20MintableBurnable",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "ids",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "values",
+						"type": "uint256[]"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155BatchReceived",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "operator",
+						"type": "address"
+					},
+					{
+						"internalType": "address",
+						"name": "from",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "onERC1155Received",
+				"outputs": [
+					{
+						"internalType": "bytes4",
+						"name": "",
+						"type": "bytes4"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "owner",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "removeAllowedERC1155Forward",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "erc1155Contract",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "tokenId",
+						"type": "uint256"
+					}
+				],
+				"name": "removeAllowedERC1155Reverse",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "renounceOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_erc20Token",
+						"type": "address"
+					}
+				],
+				"name": "setERC20Token",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes4",
+						"name": "interfaceId",
+						"type": "bytes4"
+					}
+				],
+				"name": "supportsInterface",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "newOwner",
+						"type": "address"
+					}
+				],
+				"name": "transferOwnership",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"errors": {
+				"OwnableInvalidOwner(address)": [
+					{
+						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
+					}
+				],
+				"OwnableUnauthorizedAccount(address)": [
+					{
+						"details": "The caller account is not authorized to perform an operation."
+					}
+				]
+			},
+			"kind": "dev",
+			"methods": {
+				"addAllowedERC1155Forward(address,uint256)": {
+					"params": {
+						"erc1155Contract": "The ERC1155 contract address.",
+						"tokenId": "The ERC1155 token id."
+					}
+				},
+				"addAllowedERC1155Reverse(address,uint256)": {
+					"params": {
+						"erc1155Contract": "The ERC1155 contract address.",
+						"tokenId": "The ERC1155 token id."
+					}
+				},
+				"convertToERC1155(address,uint256,uint256)": {
+					"params": {
+						"amount": "The amount of ERC20 tokens to convert (and thus ERC1155 tokens to mint).",
+						"erc1155Contract": "The address of the ERC1155 contract on which to mint tokens.",
+						"tokenId": "The ERC1155 token id to mint."
+					}
+				},
+				"onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": {
+					"returns": {
+						"_0": "bytes4 indicating acceptance."
+					}
+				},
+				"onERC1155Received(address,address,uint256,uint256,bytes)": {
+					"returns": {
+						"_0": "bytes4 indicating acceptance."
+					}
+				},
+				"owner()": {
+					"details": "Returns the address of the current owner."
+				},
+				"removeAllowedERC1155Forward(address,uint256)": {
+					"params": {
+						"erc1155Contract": "The ERC1155 contract address.",
+						"tokenId": "The ERC1155 token id."
+					}
+				},
+				"removeAllowedERC1155Reverse(address,uint256)": {
+					"params": {
+						"erc1155Contract": "The ERC1155 contract address.",
+						"tokenId": "The ERC1155 token id."
+					}
+				},
+				"renounceOwnership()": {
+					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
+				},
+				"setERC20Token(address)": {
+					"params": {
+						"_erc20Token": "The address of the ERC20 token contract."
+					}
+				},
+				"supportsInterface(bytes4)": {
+					"details": "See {IERC165-supportsInterface}."
+				},
+				"transferOwnership(address)": {
+					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+				}
+			},
+			"title": "DualERC1155ERC20Converter",
+			"version": 1
+		},
+		"userdoc": {
+			"events": {
+				"ConversionPerformed(address,uint256,uint256,uint256,uint256)": {
+					"notice": "Emitted when a conversion is performed."
+				}
+			},
+			"kind": "user",
+			"methods": {
+				"addAllowedERC1155Forward(address,uint256)": {
+					"notice": "Adds an allowed ERC1155 contract/token pair for forward conversion."
+				},
+				"addAllowedERC1155Reverse(address,uint256)": {
+					"notice": "Adds an allowed ERC1155 contract/token pair for reverse conversion."
+				},
+				"allowedERC1155Forward(address,uint256)": {
+					"notice": "Allowed ERC1155 contract/token pairs for forward conversion (ERC1155 -> ERC20). When an ERC1155 token is sent to this contract, the sender receives ERC20 tokens if allowedERC1155Forward[erc1155Contract][tokenId] is true."
+				},
+				"allowedERC1155Reverse(address,uint256)": {
+					"notice": "Allowed ERC1155 contract/token pairs for reverse conversion (ERC20 -> ERC1155). When converting ERC20 tokens, the specified ERC1155 contract/token pair must be allowed."
+				},
+				"constructor": {
+					"notice": "Constructor that passes msg.sender to Ownable."
+				},
+				"conversionHistory(uint256)": {
+					"notice": "Global array of all conversion records."
+				},
+				"conversionRecordsBySender(address,uint256)": {
+					"notice": "Mapping from a sender address to an array of conversion records."
+				},
+				"conversionRecordsERC20ToERC1155ByUser(address,uint256)": {
+					"notice": "Mapping from a user address to an array of their reverse conversion records."
+				},
+				"convertToERC1155(address,uint256,uint256)": {
+					"notice": "Converts ERC20 tokens into ERC1155 tokens. Transfers ERC20 tokens from the user, burns them, and then mints ERC1155 tokens on the specified contract."
+				},
+				"erc20ToErc1155History(uint256)": {
+					"notice": "Global array of reverse conversion records."
+				},
+				"erc20Token()": {
+					"notice": "The ERC20 token used in conversion."
+				},
+				"onERC1155BatchReceived(address,address,uint256[],uint256[],bytes)": {
+					"notice": "Called when multiple ERC1155 token types are transferred in a batch. Requirements: - The caller (operator) must equal the token owner (`from`). - Each ERC1155 contract (msg.sender) and token id must be allowed."
+				},
+				"onERC1155Received(address,address,uint256,uint256,bytes)": {
+					"notice": "Called when a single ERC1155 token type is transferred to this contract. Requirements: - The caller (operator) must equal the token owner (`from`). - The ERC1155 contract (msg.sender) and token id must be allowed for forward conversion."
+				},
+				"removeAllowedERC1155Forward(address,uint256)": {
+					"notice": "Removes an allowed ERC1155 contract/token pair for forward conversion."
+				},
+				"removeAllowedERC1155Reverse(address,uint256)": {
+					"notice": "Removes an allowed ERC1155 contract/token pair for reverse conversion."
+				},
+				"setERC20Token(address)": {
+					"notice": "Sets (or updates) the ERC20 token contract address."
+				}
+			},
+			"notice": "This contract supports two conversion directions:         1. Forward conversion (ERC1155 -> ERC20): when the contract receives ERC1155 tokens,            it mints ERC20 tokens (1:1 ratio) to the sender if the pair is allowed.         2. Reverse conversion (ERC20 -> ERC1155): a user can convert ERC20 tokens into ERC1155 tokens            by calling a function. The contract transfers and burns the ERC20 tokens and then            calls mint on an allowed ERC1155 contract.         Allowed ERC1155 token pairs (contract address and token ID) are configured separately         for forward and reverse conversions. The ERC20 token is set via an admin function.",
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"DualERC1155ERC20Converter.sol": "DualERC1155ERC20Converter"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"@openzeppelin/contracts/access/Ownable.sol": {
+			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
+				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol": {
+			"keccak256": "0x61a23d601c2ab69dd726ac55058604cbda98e1d728ba31a51c379a3f9eeea715",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d8cbb06152d82ebdd5ba1d33454e5759492040f309a82637c7e99c948a04fa20",
+				"dweb:/ipfs/QmQQuLr6WSfLu97pMEh6XLefk99TSj9k5Qu1zXGPepwGiK"
+			]
+		},
+		"@openzeppelin/contracts/token/ERC1155/utils/ERC1155Holder.sol": {
+			"keccak256": "0xe103e95f854ef0cd1bba5f469175f67cd332f5c2561941f165e3dd65cee94d6d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6cf8cc5d07cf8003255f9d766fe8188b9f6e33b6240e126a605f0d061566b23e",
+				"dweb:/ipfs/Qmd7okDCSoUt1L4G9hmb5c4W8kWUnfpAa2jyBKUp4xKErd"
+			]
+		},
+		"@openzeppelin/contracts/utils/Context.sol": {
+			"keccak256": "0x493033a8d1b176a037b2cc6a04dad01a5c157722049bbecf632ca876224dd4b2",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://6a708e8a5bdb1011c2c381c9a5cfd8a9a956d7d0a9dc1bd8bcdaf52f76ef2f12",
+				"dweb:/ipfs/Qmax9WHBnVsZP46ZxEMNRQpLQnrdE4dK8LehML1Py8FowF"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/ERC165.sol": {
+			"keccak256": "0xddce8e17e3d3f9ed818b4f4c4478a8262aab8b11ed322f1bf5ed705bb4bd97fa",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8084aa71a4cc7d2980972412a88fe4f114869faea3fefa5436431644eb5c0287",
+				"dweb:/ipfs/Qmbqfs5dRdPvHVKY8kTaeyc65NdqXRQwRK7h9s5UJEhD1p"
+			]
+		},
+		"@openzeppelin/contracts/utils/introspection/IERC165.sol": {
+			"keccak256": "0x79796192ec90263f21b464d5bc90b777a525971d3de8232be80d9c4f9fb353b8",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://f6fda447a62815e8064f47eff0dd1cf58d9207ad69b5d32280f8d7ed1d1e4621",
+				"dweb:/ipfs/QmfDRc7pxfaXB2Dh9np5Uf29Na3pQ7tafRS684wd3GLjVL"
+			]
+		},
+		"DualERC1155ERC20Converter.sol": {
+			"keccak256": "0x530758e97fe30006ef19d4f386884a58281f3e60db86e85689d3aef13514fe0d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bbe1d7dfb565d90ce5c0a25f3f580eef369beca6873d27f13ca061615a8fbd6c",
+				"dweb:/ipfs/QmeBRE8fKuhTH3tGR4WfpJcyNsLLnor2qzuCarrgNWcXxa"
+			]
+		}
+	},
+	"version": 1
+}
